@@ -2,16 +2,21 @@
 
 namespace Controllers;
 
+use MVC\Router;
+
 class LoginController
 {
     /* LOGIN */
-    public static function login()
+    public static function login(Router $router)
     {
-        echo "Desde LoginController";
-
         // En el caso de que el métido sea POST, se ejecuta el código
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
+
+        // Render a la vista
+        $router->render('auth/login', [
+            'titulo' => 'Inciar Sesión'
+        ]);
     }
 
     /* LOGOUT */
@@ -21,13 +26,16 @@ class LoginController
     }
 
     /* CREACIÓN DE LA CUENTA */
-    public static function crear()
+    public static function crear(Router $router)
     {
-        echo "Desde CrearController";
-
         // En el caso de que el métido sea POST, se ejecuta el código
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
+
+        // Render a la vista
+        $router->render('auth/crear', [
+            'titulo' => 'Crea tu cuenta'
+        ]);
     }
 
     /* FORMULARIO EN CASO DE QUE SE OLVIDE EL PASSWORD */

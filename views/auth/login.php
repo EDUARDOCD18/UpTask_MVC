@@ -1,31 +1,29 @@
 <div class="contenedor">
     <h1>UpTask</h1>
-    <p>Crea y Administra tus proyectos</p>
+    <p class="tagline">Crea y Administra tus proyectos</p>
 
-    <!-- Conetenedor para el apartado de inicio de sesión -->
     <div class="contenedor-sm">
         <p class="descripcion-pagina">Iniciar Sesión</p>
 
-        <!-- Formulario para el inicio de la sesión -->
-        <form action="/" class="formulario" method="POST">
+        <form class="formulario" method="POST" action="/" novalidate>
             <div class="campo">
-                <!-- Solicitar correo -->
-                <label for="email">Correo:</label>
-                <input type="email" name="email" id="email" placeholder="Tu correo" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Tu Email" name="email" />
+            </div>
 
-                <!-- Solicitar contrseña -->
-                <label for="password">Constraseña:</label>
-                <input type="password" name="password" id="password" placeholder="Constraseña" required>
-            </div> <!-- fin .campo -->
+            <div class="campo">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Tu Password" name="password" />
+            </div>
 
-            <!-- Enviar formulario -->
-            <input type="submit" value="Iniciar Sesión" class="boton">
-
-        </form> <!-- fin .formulario -->
+            <input type="submit" class="boton" value="Iniciar Sesión">
+        </form>
 
         <div class="acciones">
-            <a href="/crear">¿Aún no tienes cuenta? Crear una</a>
-            <a href="/olvide">Olvidé mi contraseña</a>
-        </div> <!-- fin .acciones -->
-    </div> <!-- fin .contenedor-sm -->
+            <a href="/crear">¿Aún no tienes una cuenta? obtener una</a>
+            <a href="/olvide">¿Olvidaste tu Password?</a>
+        </div>
+    </div>
+    <!--.contenedor-sm -->
+
 </div>

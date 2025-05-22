@@ -5,7 +5,7 @@
         <p class="descripcion-pagina">Crea tu cuenta en UpTask</p>
 
         <!-- Formulario para registrar -->
-        <form class="formulario" method="POST" action="/" novalidate>
+        <form class="formulario" method="POST" action="/crear" novalidate>
 
             <!-- Campo para el nombre de la persona -->
             <div class="campo">
@@ -31,7 +31,7 @@
                 <input type="password2" id="password2" placeholder="Repetir la contraseña" name="password2" />
             </div>
 
-            <input type="submit" class="boton" value="Iniciar Sesión">
+            <input type="submit" class="boton" value="Crear cuenta">
         </form>
 
         <div class="acciones">

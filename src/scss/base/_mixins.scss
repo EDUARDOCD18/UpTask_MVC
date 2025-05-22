@@ -49,7 +49,7 @@
 @mixin textoDegradado($color) {
   background: linear-gradient(
     to right,
-    v.$cyan 0%,
+    $color 0%,
     color.scale($color, $lightness: 30%) 100%
   );
 

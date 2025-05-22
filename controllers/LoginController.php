@@ -39,13 +39,17 @@ class LoginController
     }
 
     /* FORMULARIO EN CASO DE QUE SE OLVIDE EL PASSWORD */
-    public static function olvide()
+    public static function olvide(Router $router)
     {
-        echo "Desde OlvideController";
 
         // En el caso de que el métido sea POST, se ejecuta el código
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
+
+        // Render a la vista
+        $router->render('auth/olvide', [
+            'titulo' => 'Recupera tu contraseña'
+        ]);
     }
 
     /* COLOCARL EL NUEVO PASSWORD */

@@ -1,0 +1,32 @@
+@use "base/variables" as v;
+@use "base/mixins" as m;
+@use "sass:color";
+
+.reestablecer {
+  margin-top: 5rem;
+
+  /* Logo de UpTask */
+  .uptask {
+    @include m.textoDegradado(v.$azul);
+  }
+
+  /* Estilos para el botón de submit */
+  input[type="submit"] {
+    @include m.boton(v.$azul, v.$blanco);
+
+    &:hover {
+      background-color: color.scale(v.$cyan, $lightness: 10%);
+    }
+
+    &:focus {
+      background-color: color.scale(v.$cyan, $lightness: 10%);
+    }
+  }
+
+  /* Estilo para los enlaces de acciones */
+  .acciones {
+    a {
+      color: v.$azul;
+    }
+  }
+}

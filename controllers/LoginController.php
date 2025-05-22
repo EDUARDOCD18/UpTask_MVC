@@ -53,10 +53,12 @@ class LoginController
     }
 
     /* COLOCARL EL NUEVO PASSWORD */
-    public static function restablecer()
+    public static function reestablecer(Router $router)
     {
-        echo "Desde RestablecerController";
-
+        $router->render('auth/reestablecer',[
+            'titulo' => 'Reestablece tu contraseña'
+        ]);
+        
         // En el caso de que el métido sea POST, se ejecuta el código
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }

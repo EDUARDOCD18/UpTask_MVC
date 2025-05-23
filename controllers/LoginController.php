@@ -58,16 +58,18 @@ class LoginController
         $router->render('auth/reestablecer',[
             'titulo' => 'Reestablece tu contraseña'
         ]);
-        
+
         // En el caso de que el métido sea POST, se ejecuta el código
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
     /* MENSAJE DE CONFIRMACIÓN DE CUENTA */
-    public static function mensaje()
+    public static function mensaje(Router $router)
     {
-        echo "Desde mensajeController";
+        $router->render('auth/mensaje',[
+            'titulo' => 'Notificación'
+        ]);
     }
 
     /* CONFIRMACIÓN DE CUENTA */

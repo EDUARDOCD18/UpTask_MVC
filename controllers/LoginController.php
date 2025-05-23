@@ -2,16 +2,21 @@
 
 namespace Controllers;
 
+use MVC\Router;
+
 class LoginController
 {
     /* LOGIN */
-    public static function login()
+    public static function login(Router $router)
     {
-        echo "Desde LoginController";
-
         // En el caso de que el métido sea POST, se ejecuta el código
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
+
+        // Render a la vista
+        $router->render('auth/login', [
+            'titulo' => 'Inciar Sesión'
+        ]);
     }
 
     /* LOGOUT */
@@ -21,29 +26,38 @@ class LoginController
     }
 
     /* CREACIÓN DE LA CUENTA */
-    public static function crear()
+    public static function crear(Router $router)
     {
-        echo "Desde CrearController";
-
         // En el caso de que el métido sea POST, se ejecuta el código
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
+
+        // Render a la vista
+        $router->render('auth/crear', [
+            'titulo' => 'Crea tu cuenta'
+        ]);
     }
 
     /* FORMULARIO EN CASO DE QUE SE OLVIDE EL PASSWORD */
-    public static function olvide()
+    public static function olvide(Router $router)
     {
-        echo "Desde OlvideController";
 
         // En el caso de que el métido sea POST, se ejecuta el código
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
+
+        // Render a la vista
+        $router->render('auth/olvide', [
+            'titulo' => 'Recupera tu contraseña'
+        ]);
     }
 
     /* COLOCARL EL NUEVO PASSWORD */
-    public static function restablecer()
+    public static function reestablecer(Router $router)
     {
-        echo "Desde RestablecerController";
+        $router->render('auth/reestablecer',[
+            'titulo' => 'Reestablece tu contraseña'
+        ]);
 
         // En el caso de que el métido sea POST, se ejecuta el código
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -51,14 +65,18 @@ class LoginController
     }
 
     /* MENSAJE DE CONFIRMACIÓN DE CUENTA */
-    public static function mensaje()
+    public static function mensaje(Router $router)
     {
-        echo "Desde mensajeController";
+        $router->render('auth/mensaje',[
+            'titulo' => 'Notificación'
+        ]);
     }
 
     /* CONFIRMACIÓN DE CUENTA */
-    public static function confirmar()
+    public static function confirmar(Router $router)
     {
-        echo "Desde confirmarController";
+        $router->render('auth/confirmar',[
+            'titulo' => 'Confirmación'
+        ]);
     }
 }

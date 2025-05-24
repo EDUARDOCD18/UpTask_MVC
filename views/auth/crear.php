@@ -10,13 +10,13 @@
             <!-- Campo para el nombre de la persona -->
             <div class="campo">
                 <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" placeholder="Tu nombre" name="nombre" />
+                <input type="text" id="nombre" placeholder="Tu nombre" name="nombre" value="<?php echo is_object($usuario) ? $usuario->nombre : ''; ?>"/>
             </div>
 
             <!-- Campo para el correo de la persona -->
             <div class="campo">
                 <label for="email">Email</label>
-                <input type="email" id="email" placeholder="Tu Email" name="email" />
+                <input type="email" id="email" placeholder="Tu Email" name="email" value="<?php echo is_object($usuario) ? $usuario->email : ''; ?>"/>
             </div>
 
             <!-- Campo para la contraseña -->

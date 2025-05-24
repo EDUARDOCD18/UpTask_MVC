@@ -4,7 +4,8 @@ namespace Model;
 
 /* MODELO DE USUARIOS */
 
-class Usario extends ActiveRecord
+#[\AllowDynamicProperties]
+class Usuario extends ActiveRecord
 {
     protected static $table = 'usuarios';
     protected static $columnsDB = ['id', 'nombre', 'email', 'password', 'token', 'confirmado'];
@@ -17,5 +18,18 @@ class Usario extends ActiveRecord
         $this->password = $args['password'] ?? '';
         $this->token = $args['token'] ?? '';
         $this->confirmado = $args['confirmado'] ?? 0;
+    }
+
+    /* Validación para cuentas nuevas */
+    public function validarNuevaCuenta(){
+        if (!$this->nombre) {
+            self::$alertas['error'][] = 'El nombre es obligatorio';
+        }
+
+        if (!$this->email) {
+            self::$alertas['error'][] = 'El correo es obligatorio';
+        }
+
+        return self::$alertas;
     }
 }

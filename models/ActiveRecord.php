@@ -1,5 +1,6 @@
 <?php
 namespace Model;
+#[\AllowDynamicProperties]
 class ActiveRecord {
 
     // Base DE DATOS

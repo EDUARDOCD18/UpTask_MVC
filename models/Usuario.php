@@ -1,0 +1,21 @@
+<?php
+
+namespace Model;
+
+/* MODELO DE USUARIOS */
+
+class Usario extends ActiveRecord
+{
+    protected static $table = 'usuarios';
+    protected static $columnsDB = ['id', 'nombre', 'email', 'password', 'token', 'confirmado'];
+
+    public function __construct($args = [])
+    {
+        $this->id = $args['id'] ?? null;
+        $this->nombre = $args['nombre'] ?? '';
+        $this->email = $args['email'] ?? '';
+        $this->password = $args['password'] ?? '';
+        $this->token = $args['token'] ?? '';
+        $this->confirmado = $args['confirmado'] ?? 0;
+    }
+}

@@ -10,6 +10,8 @@ class ActiveRecord {
 
     // Alertas y Mensajes
     protected static $alertas = [];
+
+    public $id;
     
     // Definir la conexión a la BD - includes/database.php
     public static function setDB($database) {
@@ -153,7 +155,6 @@ class ActiveRecord {
 
         return $objeto;
     }
-
 
 
     // Identificar y unir los atributos de la BD

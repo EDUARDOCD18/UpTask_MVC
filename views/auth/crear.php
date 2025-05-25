@@ -28,7 +28,7 @@
             <!-- Campo para verificar la contraseña -->
             <div class="campo">
                 <label for="password2">Repetir la contraseña</label>
-                <input type="password2" id="password2" placeholder="Repetir la contraseña" name="password2" />
+                <input type="password" id="password2" placeholder="Repetir la contraseña" name="password2" />
             </div>
 
             <input type="submit" class="boton" value="Crear cuenta">

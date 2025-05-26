@@ -32,12 +32,11 @@ class LoginController
     {
         $usuario = new Usuario;
         $alertas = [];
-        
+
         // En el caso de que el métido sea POST, se ejecuta el código
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $usuario->sincronizar($_POST);
             $alertas = $usuario->validarNuevaCuenta();
-
         }
 
         // Render a la vista

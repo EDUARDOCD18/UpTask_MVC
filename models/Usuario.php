@@ -7,8 +7,8 @@ namespace Model;
 #[\AllowDynamicProperties]
 class Usuario extends ActiveRecord
 {
-    protected static $table = 'usuarios';
-    protected static $columnsDB = ['id', 'nombre', 'email', 'password', 'token', 'confirmado'];
+    protected static $tabla = 'usuarios';
+    protected static $columnasDB = ['id', 'nombre', 'email', 'password', 'token', 'confirmado'];
 
     public $id;
     public $nombre;

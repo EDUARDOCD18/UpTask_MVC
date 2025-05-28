@@ -8,10 +8,11 @@ namespace Model;
 class Usuario extends ActiveRecord
 {
     protected static $tabla = 'usuarios';
-    protected static $columnasDB = ['id', 'nombre', 'email', 'password', 'token', 'confirmado'];
+    protected static $columnasDB = ['id', 'nombre', 'apellido', 'email', 'password', 'token', 'confirmado'];
 
     public $id;
     public $nombre;
+    public $apellido;
     public $email;
     public $password;
     public $password2;
@@ -22,6 +23,7 @@ class Usuario extends ActiveRecord
     {
         $this->id = $args['id'] ?? null;
         $this->nombre = $args['nombre'] ?? '';
+        $this->apallido = $args['apallido'] ?? '';
         $this->email = $args['email'] ?? '';
         $this->password = $args['password'] ?? '';
         $this->password2 = $args['password2'] ?? null;
@@ -34,6 +36,10 @@ class Usuario extends ActiveRecord
     {
         if (!$this->nombre) {
             self::$alertas['error'][] = 'El nombre es obligatorio';
+        }
+
+        if (!$this->apellido) {
+            self::$alertas['error'][] = 'El apellido es obligatorio';
         }
 
         if (!$this->email) {
@@ -53,5 +59,17 @@ class Usuario extends ActiveRecord
         }
 
         return self::$alertas;
+    }
+
+    /* Hashear el password */
+    public function hashearPassword()
+    {
+        $this->password = password_hash($this->password, PASSWORD_BCRYPT);
+    }
+
+    /* Generar un token único */
+    public function crearToken()
+    {
+        $this->token = uniqid();
     }
 }

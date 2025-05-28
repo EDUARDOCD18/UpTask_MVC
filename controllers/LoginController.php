@@ -45,10 +45,23 @@ class LoginController
                 if ($existeUsuario) {
                     Usuario::setAlerta('error', 'El usuario ya está registrado');
                     $alertas = Usuario::getAlertas();
-                } else{
-                    // Crear nuevo usuario
-                }
+                } else {
+                    // Hashear el password
+                    $usuario->hashearPassword();
 
+                    // eliminar password2
+                    unset($usuario->password2);
+
+                    // Generar un token único
+                    $usuario->crearToken();
+
+                    // Crear nuevo usuario
+                    $resultado = $usuario->guardar();
+
+                    if ($resultado) {
+                        header('Location: /mensaje');
+                    }
+                }
             }
         }
 

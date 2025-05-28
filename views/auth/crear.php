@@ -14,6 +14,11 @@
                 <input type="text" id="nombre" placeholder="Tu nombre" name="nombre" value="<?php echo is_object($usuario) ? $usuario->nombre : ''; ?>"/>
             </div>
 
+            <div class="campo">
+                <label for="apellido">Apellido</label>
+                <input type="text" id="apellido" placeholder="Tu apellido" name="apellido" value="<?php echo is_object($usuario) ? $usuario->apellido : ''; ?>"/>
+            </div>
+
             <!-- Campo para el correo de la persona -->
             <div class="campo">
                 <label for="email">Email</label>

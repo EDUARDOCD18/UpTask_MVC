@@ -18,6 +18,12 @@
     color: v.$rojo;
   }
 
+  &.exito {
+    background-color: color.scale(v.$verde, $lightness: 60%);
+    border-left: 0.5rem solid v.$verde;
+    color: v.$verde;
+  }
+
   &.animar {
     animation: vibrar 0.4s ease;
   }

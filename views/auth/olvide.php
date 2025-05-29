@@ -4,6 +4,8 @@
     <div class="contenedor-sm">
         <p class="descripcion-pagina">Recupera tu contraseña de UpTask</p>
 
+        <?php include_once __DIR__ . '/../templates/alertas.php' ?>
+
         <!-- Formulario para registrar -->
         <form class="formulario" method="POST" action="/olvide" novalidate>
 

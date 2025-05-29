@@ -93,20 +93,24 @@ class LoginController
 
                 if ($usuario && $usuario->confirmado) {
                     // Generar un nuevo token
+                    $usuario->crearToken();
+                    unset($usuario->password2); // Eliminar el password2
 
                     // Actualizar el usuario con el nuevo token
+                    $usuario->guardar();
 
                     // Enviar el email de recuperación
 
                     // Imprimir alerta de éxito
-                    
+                    Usuario::setAlerta('exito', 'Hemos enviado un correo con las instrucciones para reestablecer tu contraseña');
                 } else {
                     // Si no existe el usuario, mostrar alerta
                     Usuario::setAlerta('error', 'El correo no existe o la cuenta no está confirmada');
-                    $alertas = Usuario::getAlertas();
                 }
             }
         }
+
+        $alertas = Usuario::getAlertas();
 
         // Render a la vista
         $router->render('auth/olvide', [

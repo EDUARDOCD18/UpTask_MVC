@@ -100,6 +100,8 @@ class LoginController
                     $usuario->guardar();
 
                     // Enviar el email de recuperación
+                    $email = new Email($usuario->email, $usuario->nombre, $usuario->token);
+                    $email->enviarInstrucciones();
 
                     // Imprimir alerta de éxito
                     Usuario::setAlerta('exito', 'Hemos enviado un correo con las instrucciones para reestablecer tu contraseña');

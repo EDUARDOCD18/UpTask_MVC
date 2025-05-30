@@ -3,14 +3,14 @@
 
     <div class="contenedor-sm">
 
-        <?php include_once __DIR__ . '/../templates/alertas.php' ?>
-
         <?php if ($mostrar) { ?>
 
             <p class="descripcion-pagina">Reestablece tu acceso</p>
 
+            <?php include_once __DIR__ . '/../templates/alertas.php' ?>
+
             <!-- Formulario para registrar -->
-            <form class="formulario" method="POST" action="/reestablecer" novalidate>
+            <form class="formulario" method="POST">
 
                 <!-- Campo para la contraseña -->
                 <div class="campo">
@@ -21,7 +21,7 @@
                 <!-- Campo para verificar la contraseña -->
                 <div class="campo">
                     <label for="password2">Repetir la contraseña</label>
-                    <input type="password2" id="password2" placeholder="Repetir la contraseña" name="password2" />
+                    <input type="password" id="password2" placeholder="Repetir la contraseña" name="password2" />
                 </div>
 
                 <input type="submit" class="boton" value="Guardar contraseña">

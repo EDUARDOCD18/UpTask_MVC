@@ -136,19 +136,29 @@ class LoginController
         if (empty($usuario)) {
             Usuario::setAlerta('error', 'Token no válido');
             $mostrar = false;
-        } 
+        }
 
         $alertas = Usuario::getAlertas();
+
+        // En el caso de que el métido sea POST, se ejecuta el código
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Añadir el nuevo password
+            $usuario->sincronizar($_POST);
+
+            // Validar el password
+            $alertas = $usuario->validarPassword();
+
+            if(empty($alertas)){
+                //  Hashear el password
+                debuguear($usuario);
+            }
+        }
 
         $router->render('auth/reestablecer', [
             'titulo' => 'Reestablece tu contraseña',
             'alertas' => $alertas,
             'mostrar' => $mostrar
         ]);
-
-        // En el caso de que el métido sea POST, se ejecuta el código
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        }
     }
 
     /* MENSAJE DE CONFIRMACIÓN DE CUENTA */

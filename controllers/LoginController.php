@@ -124,8 +124,26 @@ class LoginController
     /* COLOCARL EL NUEVO PASSWORD */
     public static function reestablecer(Router $router)
     {
+        $alertas = [];
+        $mostrar = true;
+        $token = s($_GET['token'] ?? null);
+
+        if (!$token) header('Location: /');
+
+        // Buscar al usuario por el token
+        $usuario = Usuario::where('token', $token);
+
+        if (empty($usuario)) {
+            Usuario::setAlerta('error', 'Token no válido');
+            $mostrar = false;
+        } 
+
+        $alertas = Usuario::getAlertas();
+
         $router->render('auth/reestablecer', [
-            'titulo' => 'Reestablece tu contraseña'
+            'titulo' => 'Reestablece tu contraseña',
+            'alertas' => $alertas,
+            'mostrar' => $mostrar
         ]);
 
         // En el caso de que el métido sea POST, se ejecuta el código

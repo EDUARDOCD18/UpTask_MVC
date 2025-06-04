@@ -1,8 +1,10 @@
 <div class="contenedor login">
     <?php include_once __DIR__ . '/../templates/nombre-sitio.php' ?>
-    
+
     <div class="contenedor-sm">
         <p class="descripcion-pagina">Iniciar Sesión</p>
+
+        <?php include_once __DIR__ . '/../templates/alertas.php' ?> <!-- Importa la plantilla de alertas -->
 
         <form class="formulario" method="POST" action="/" novalidate>
             <div class="campo">

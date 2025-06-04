@@ -11,13 +11,22 @@ class LoginController
     /* LOGIN */
     public static function login(Router $router)
     {
+        $alertas = [];
         // En el caso de que el métido sea POST, se ejecuta el código
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $auth = new Usuario($_POST);
+            $alertas = $auth->validarLogin();
+
+            /* Si las aleras están vacías */
+            if(empty($alertas)){
+                // Verificar que el usuario exista
+            }
         }
 
         // Render a la vista
         $router->render('auth/login', [
-            'titulo' => 'Inciar Sesión'
+            'titulo' => 'Inciar Sesión', 
+            'alertas' => $alertas
         ]);
     }
 

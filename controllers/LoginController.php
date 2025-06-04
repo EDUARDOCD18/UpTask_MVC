@@ -14,18 +14,28 @@ class LoginController
         $alertas = [];
         // En el caso de que el métido sea POST, se ejecuta el código
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $auth = new Usuario($_POST);
-            $alertas = $auth->validarLogin();
+            $usuario = new Usuario($_POST);
+            $alertas = $usuario->validarLogin();
 
             /* Si las aleras están vacías */
-            if(empty($alertas)){
+            if (empty($alertas)) {
                 // Verificar que el usuario exista
+                $usuario = Usuario::where('email', $usuario->email);
+
+                if (!$usuario || !$usuario->confirmado) {
+                    Usuario::setAlerta('error', 'El usuario no existe o no está confirmado');
+                } else{
+                    // Si el usuario existe, verificar el password
+                }
+
             }
         }
 
+        $alertas = Usuario::getAlertas();
+
         // Render a la vista
         $router->render('auth/login', [
-            'titulo' => 'Inciar Sesión', 
+            'titulo' => 'Inciar Sesión',
             'alertas' => $alertas
         ]);
     }
@@ -157,7 +167,7 @@ class LoginController
             // Validar el password
             $alertas = $usuario->validarPassword();
 
-            if(empty($alertas)){
+            if (empty($alertas)) {
                 //  Hashear el password
                 $usuario->hashearPassword();
                 unset($usuario->password2); // Eliminar el password2
@@ -169,10 +179,9 @@ class LoginController
                 $resultado = $usuario->guardar();
 
                 // Redireccionar al login
-                if($resultado){
+                if ($resultado) {
                     header('Location: /');
                 }
-
             }
         }
 

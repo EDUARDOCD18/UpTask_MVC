@@ -22,7 +22,7 @@
             <!-- Campo para el correo de la persona -->
             <div class="campo">
                 <label for="email">Email</label>
-                <input type="email" id="email" placeholder="Tu Email" name="email" value="<?php echo is_object($usuario) ? $usuario->email : ''; ?>"/>
+                <input type="email" id="email" placeholder="Tu Email" name="email" value="<?php echo is_object($usuario) ? $usuario->email : 'c'; ?>"/>
             </div>
 
             <!-- Campo para la contraseña -->

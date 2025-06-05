@@ -5,6 +5,7 @@ namespace Controllers;
 use Classes\Email;
 use Model\Usuario;
 use MVC\Router;
+use SessionHandler;
 
 class LoginController
 {
@@ -24,10 +25,23 @@ class LoginController
 
                 if (!$usuario || !$usuario->confirmado) {
                     Usuario::setAlerta('error', 'El usuario no existe o no está confirmado');
-                } else{
+                } else {
                     // Si el usuario existe, verificar el password
-                }
+                    if (password_verify($_POST['password'], $usuario->password)) {
+                        // Iniciar sesión
+                        session_start();
+                        $_SESSION['id'] = $usuario->id;
+                        $_SESSION['nombre'] = $usuario->nombre;
+                        $_SESSION['email'] = $usuario->email;
+                        $_SESSION['login'] = true;
 
+                        // Redireccionar al usuario
+                        header('Location: /proyectos');
+                    } else {
+                        Usuario::setAlerta('error', 'Contraseña incorrecta');
+                        $alertas = Usuario::getAlertas();
+                    }
+                }
             }
         }
 

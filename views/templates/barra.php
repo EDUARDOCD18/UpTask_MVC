@@ -1,6 +1,6 @@
 <div class="barra">
     <p>
-        Hola, <?php echo $_SESSION['nombre'] ?? 'Usuario'; ?> :D
+        Hola, <span><?php echo $_SESSION['nombre'] ?? 'Usuario'; ?> :D</span>
     </p>
 
     <a href="/logout" class="cerrar-sesion">Cerrar Sesión</a>

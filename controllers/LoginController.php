@@ -57,7 +57,9 @@ class LoginController
     /* LOGOUT */
     public static function logout()
     {
-        echo "Desde LogoutController";
+        session_start();
+        $_SESSION = [];
+        header('Location: /');
     }
 
     /* CREACIÓN DE LA CUENTA */

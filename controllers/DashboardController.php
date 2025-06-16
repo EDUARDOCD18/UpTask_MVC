@@ -3,7 +3,6 @@
 namespace Controllers;
 
 use MVC\Router;
-use Model\Usuario;
 use Model\Proyecto;
 
 
@@ -20,11 +19,25 @@ class DashboardController
         ]);
     }
 
+    /* Crear el proyecto */
     public static function crear_proyecto(Router $router)
     {
         session_start();
         isAuth();
         $alertas = [];
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $proyecto = new Proyecto($_POST);
+            
+            // Validación
+            $alertas = $proyecto->validarProyecto();
+
+            // Si pasa la validación
+            if(empty($alertas)){
+                // Guardar el proyecto
+                debuguear($proyecto);
+            }
+        }
 
         $router->render('dashboard/crear-proyecto', [
             'titulo' => 'Crear Proyecto',
@@ -32,6 +45,7 @@ class DashboardController
         ]);
     }
 
+    /* Perfil */
     public static function perfil(Router $router)
     {
         session_start();

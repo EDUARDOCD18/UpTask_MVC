@@ -5,16 +5,6 @@ namespace Model;
 #[\AllowDynamicProperties]
 class ActiveRecord
 {
-
-    public $id;
-    public $nombre;
-    public $apellido;
-    public $email;
-    public $password;
-    public $password2;
-    public $token;
-    public $confirmado;
-
     // Base DE DATOS
     protected static $db;
     protected static $tabla = '';

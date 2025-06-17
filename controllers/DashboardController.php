@@ -28,20 +28,29 @@ class DashboardController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $proyecto = new Proyecto($_POST);
-            
-            // Validación
+
+            // validación
             $alertas = $proyecto->validarProyecto();
 
-            // Si pasa la validación
-            if(empty($alertas)){
-                // Guardar el proyecto
-                debuguear($proyecto);
+            if (empty($alertas)) {
+                // Generar una URL única 
+                $hash = md5(uniqid());
+                $proyecto->url = $hash;
+
+                // Almacenar el creador del proyecto
+                $proyecto->propietarioId = $_SESSION['id'];
+
+                // Guardar el Proyecto
+                $proyecto->guardar();
+
+                // Redireccionar
+                header('Location: /proyecto?id=' . $proyecto->url);
             }
         }
 
         $router->render('dashboard/crear-proyecto', [
-            'titulo' => 'Crear Proyecto',
-            'alertas' => $alertas
+            'alertas' => $alertas,
+            'titulo' => 'Crear Proyecto'
         ]);
     }
 

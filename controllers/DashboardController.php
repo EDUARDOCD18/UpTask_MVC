@@ -54,6 +54,28 @@ class DashboardController
         ]);
     }
 
+    /* Visualizar el proyecto */
+    public static function proyecto(Router $router)
+    {
+
+        session_start();
+        isAuth();
+
+        $token = $_GET['id']; // Obtener el ID del proyecto desde la URL
+
+        if (!$token) header('Location /dashboard'); // Si el ID no existe, redireccionar a proyectos
+
+        // Validar que la persona que visita el proyecto es la misma que lo creó
+        $proyecto = Proyecto::where('url', $token);
+        if ($proyecto->propietarioId !== $_SESSION['id']) {
+            header('Location: /dashboard');
+        }
+
+        $router->render('dashboard/proyecto', [
+            'titulo' => $proyecto->proyecto
+        ]);
+    }
+
     /* Perfil */
     public static function perfil(Router $router)
     {

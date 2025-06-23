@@ -42,9 +42,21 @@
         }, 500);
       }
 
-      console.log(e.target);
+      if (e.target.classList.contains("submit-nueva-tarea")) {
+        submitFomularioNuevaTarea();
+      }
     });
 
     document.querySelector("body").appendChild(modal); // Agregal el modal al documento
+
+    function submitFomularioNuevaTarea() {
+      const tarea = document.querySelector("#tarea").value.trim();
+
+      if (tarea === "") {
+        // Mostrar alerta de que el nombre de la Tarea no debe ir vacío
+
+        return;
+      } 
+    }
   }
 })();

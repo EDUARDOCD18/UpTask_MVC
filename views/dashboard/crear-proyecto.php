@@ -5,7 +5,7 @@
     <?php include_once __DIR__ . '/../templates/alertas.php' ?>
     <!-- Importa la plantilla de alertas -->
 
-    <form action="" class="formulario">
+    <form action="/crear-proyecto" class="formulario" method="POST">
         <?php include_once __DIR__ . '/formulario-proyecto.php'; ?>
         <input type="submit" value="Crear Proyecto">
     </form>

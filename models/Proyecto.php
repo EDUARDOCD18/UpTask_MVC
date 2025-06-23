@@ -1,14 +1,10 @@
 <?php
 
-namespace Proyecto;
+namespace Model;
 
 use Model\ActiveRecord;
 
-/* MODELO PARA PROYECTOS */
-
-#[\AllowDynamicProperties]
-class Proyecto extends ActiveRecord
-{
+class Proyecto extends ActiveRecord {
     protected static $tabla = 'proyectos';
     protected static $columnasDB = ['id', 'proyecto', 'url', 'propietarioId'];
 
@@ -17,12 +13,18 @@ class Proyecto extends ActiveRecord
     public $url;
     public $propietarioId;
 
-    /* CONSTRUCTOR */
     public function __construct($args = [])
     {
         $this->id = $args['id'] ?? null;
         $this->proyecto = $args['proyecto'] ?? '';
         $this->url = $args['url'] ?? '';
         $this->propietarioId = $args['propietarioId'] ?? '';
+    }
+
+    public function validarProyecto() {
+        if(!$this->proyecto) {
+            self::$alertas['error'][] = 'El Nombre del Proyecto es Obligatorio';
+        }
+        return self::$alertas;
     }
 }

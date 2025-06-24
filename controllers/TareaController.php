@@ -1,7 +1,9 @@
-<!-- Controlador para las tareas de los proyectos -->
 <?php
 
 namespace Controllers;
+
+use Model\Proyecto;
+use Model\Tarea;
 
 class TareaController
 {
@@ -14,6 +16,7 @@ class TareaController
     public static function crear()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            echo json_encode($_POST);
         }
     }
 

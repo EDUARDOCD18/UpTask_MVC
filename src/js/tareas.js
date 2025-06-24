@@ -60,10 +60,9 @@
           document.querySelector(".formulario legend")
         );
         return;
-
-        // Al pasar las validaciones, llamar a:
-        agregarTarea(tarea);
       }
+      // Al pasar las validaciones, llamar a:
+      agregarTarea(tarea);
     }
 
     /* Función para mostrar la alerta */
@@ -89,8 +88,26 @@
         alerta.remove();
       }, 3000);
     }
+  }
 
-    /* Función para agregar la tarea. Consultar al servidor para agregar al proyecto actual */
-    function agregarTarea(tarea) {}
+  /* Función para agregar la tarea. Consultar al servidor para agregar al proyecto actual */
+  async function agregarTarea(tarea) {
+    // Construir la petición
+    const datos = new FormData();
+    datos.append("nombre", tarea);
+    console.log("1");
+
+    try {
+      const url = "http://localhost:3000/api/tarea";
+      const respuesta = await fetch(url, {
+        method: "POST",
+        body: datos,
+      });
+
+      const resultado = await respuesta.json();
+      console.log(resultado);
+    } catch (error) {
+      console.log(error);
+    }
   }
 })();

@@ -33,22 +33,20 @@
 
     input[type="text"] {
       border: 1px solid v.$gris;
-      border-radius: .5rem;
+      border-radius: 0.5rem;
     }
 
     .opciones {
       display: flex;
       justify-content: space-between;
-    }
-
-    .submit-nueva-tarea {
-      @include m.boton(v.$indigo, v.$blanco);
       
-    }
+      .submit-nueva-tarea {
+        @include m.boton(v.$indigo, v.$blanco);
+      }
 
-    .cerrar-modal {
-      @include m.boton(v.$naranja, v.$blanco);
-      
+      .cerrar-modal {
+        @include m.boton(v.$naranja, v.$blanco);
+      }
     }
 
     &.animar {

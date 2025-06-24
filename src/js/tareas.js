@@ -14,7 +14,7 @@
     <form class="formulario nueva-tarea">
       <legend>Añade una nueva tarea</legend>
       <div class="campo">
-        <label for="">Tarea</label>
+        <label>Tarea</label>
         <input type="text" name="tarea" placeholder="Añadir tarea" id="tarea" />
       </div>
 
@@ -43,20 +43,54 @@
       }
 
       if (e.target.classList.contains("submit-nueva-tarea")) {
-        submitFomularioNuevaTarea();
+        submitFormularioNuevaTarea();
       }
     });
 
-    document.querySelector("body").appendChild(modal); // Agregal el modal al documento
+    document.querySelector(".dashboard").appendChild(modal); // Agregal el modal al documento
 
-    function submitFomularioNuevaTarea() {
+    function submitFormularioNuevaTarea() {
       const tarea = document.querySelector("#tarea").value.trim();
 
       if (tarea === "") {
         // Mostrar alerta de que el nombre de la Tarea no debe ir vacío
-
+        mostrarAlerta(
+          "El nombre de la tarea es obligatorio",
+          "error",
+          document.querySelector(".formulario legend")
+        );
         return;
-      } 
+
+        // Al pasar las validaciones, llamar a:
+        agregarTarea(tarea);
+      }
     }
+
+    /* Función para mostrar la alerta */
+    function mostrarAlerta(mensaje, tipo, referencia) {
+      // Prevenir la creación de varias alertas
+      const alertaPrevia = document.querySelector(".alerta");
+      if (alertaPrevia) {
+        alertaPrevia.remove();
+      }
+
+      const alerta = document.createElement("DIV");
+      alerta.classList.add("alerta", tipo);
+      alerta.textContent = mensaje;
+
+      // Inserta la la alerta antes del legend
+      referencia.parentElement.insertBefore(
+        alerta,
+        referencia.nextElementSibling
+      );
+
+      // Eliminar la alerta luego de 3 segundos
+      setTimeout(() => {
+        alerta.remove();
+      }, 3000);
+    }
+
+    /* Función para agregar la tarea. Consultar al servidor para agregar al proyecto actual */
+    function agregarTarea(tarea) {}
   }
 })();

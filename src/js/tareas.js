@@ -95,7 +95,6 @@
     // Construir la petición
     const datos = new FormData();
     datos.append("nombre", tarea);
-    console.log("1");
 
     try {
       const url = "http://localhost:3000/api/tarea";

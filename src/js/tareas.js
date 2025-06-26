@@ -94,7 +94,8 @@
   async function agregarTarea(tarea) {
     // Construir la petición
     const datos = new FormData();
-    datos.append("nombre", tarea);
+    datos.append("nombre", tarea); // Asignar el nombre de la tardea
+    datos.append("proyectoId", obtenerProyecto()); // Asignar el ID del proyecto
 
     try {
       const url = "http://localhost:3000/api/tarea";
@@ -105,8 +106,18 @@
 
       const resultado = await respuesta.json();
       console.log(resultado);
+      
     } catch (error) {
       console.log(error);
     }
+  }
+
+  /* Función para obtener el proyecto */
+  function obtenerProyecto() {
+    // Obtener el ID del proyecto desde la URL
+    const proyectoParams = new URLSearchParams(window.location.search);
+    const proyecto = Object.fromEntries(proyectoParams.entries());
+
+    return proyecto.id;
   }
 })();

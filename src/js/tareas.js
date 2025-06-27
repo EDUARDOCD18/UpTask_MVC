@@ -64,30 +64,30 @@
       // Al pasar las validaciones, llamar a:
       agregarTarea(tarea);
     }
+  }
 
-    /* Función para mostrar la alerta */
-    function mostrarAlerta(mensaje, tipo, referencia) {
-      // Prevenir la creación de varias alertas
-      const alertaPrevia = document.querySelector(".alerta");
-      if (alertaPrevia) {
-        alertaPrevia.remove();
-      }
-
-      const alerta = document.createElement("DIV");
-      alerta.classList.add("alerta", tipo);
-      alerta.textContent = mensaje;
-
-      // Inserta la la alerta antes del legend
-      referencia.parentElement.insertBefore(
-        alerta,
-        referencia.nextElementSibling
-      );
-
-      // Eliminar la alerta luego de 3 segundos
-      setTimeout(() => {
-        alerta.remove();
-      }, 3000);
+  /* Función para mostrar la alerta */
+  function mostrarAlerta(mensaje, tipo, referencia) {
+    // Prevenir la creación de varias alertas
+    const alertaPrevia = document.querySelector(".alerta");
+    if (alertaPrevia) {
+      alertaPrevia.remove();
     }
+
+    const alerta = document.createElement("DIV");
+    alerta.classList.add("alerta", tipo);
+    alerta.textContent = mensaje;
+
+    // Inserta la la alerta antes del legend
+    referencia.parentElement.insertBefore(
+      alerta,
+      referencia.nextElementSibling
+    );
+
+    // Eliminar la alerta luego de 3 segundos
+    setTimeout(() => {
+      alerta.remove();
+    }, 3000);
   }
 
   /* Función para agregar la tarea. Consultar al servidor para agregar al proyecto actual */
@@ -106,7 +106,12 @@
 
       const resultado = await respuesta.json();
       console.log(resultado);
-      
+
+      mostrarAlerta(
+        resultado.mensaje,
+        resultado.tipo,
+        document.querySelector(".formulario legend")
+      );
     } catch (error) {
       console.log(error);
     }

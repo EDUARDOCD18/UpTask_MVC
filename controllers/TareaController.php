@@ -15,13 +15,35 @@ class TareaController
     /* Método crear */
     public static function crear()
     {
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            $respuesta = [
-                "proyectoId" => $_POST['proyectoId'],
-            ];
+            session_start();
 
-            echo json_encode($respuesta);
+            $proyectoId = $_POST['proyectoId'];
+
+            $proyecto = Proyecto::where(
+                'url',
+                $proyectoId
+            );
+
+            // Verificar si el proyecto existe
+            if (!$proyecto || $proyecto->propietarioId !== $_SESSION['id']) {
+
+                $respuesta = [
+                    'tipo' => 'error',
+                    'mensaje' => 'Error al agregar la tarea.'
+                ];
+
+                echo json_encode($respuesta);
+                return;
+            } else {
+                $respuesta = [
+                    'tipo' => 'exito',
+                    'mensaje' => 'tarea agreda a tu proyecto.'
+                ];
+                echo json_encode($respuesta);
+            }
         }
     }
 

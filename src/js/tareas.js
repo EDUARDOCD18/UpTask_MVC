@@ -1,10 +1,33 @@
 (function () {
+  obtenerTareas(); // Llamar a la función para obtener las tareas al cargar la página
+
   // Botón para mostrar el Modal de Agregar tarea
   const nuevaTareaBtn = document.querySelector("#agregar-tarea");
-  nuevaTareaBtn.addEventListener("click", function () {
-    mostrarFormulario();
-  });
+  nuevaTareaBtn.addEventListener("click", mostrarFormulario);
 
+  // Función para obtener las tareas del proyecto actual
+  async function obtenerTareas() {
+    try {
+      const id = obtenerProyecto();
+      const url = `/api/tareas?id=${id}`;
+      const respuesta = await fetch(url);
+      const resultado = await respuesta.json();
+
+      const { tareas } = resultado;
+
+      // Llamar a la función para motrar las tareas
+      mostrarTareas(tareas);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // Fucnión para mostrar las tareas en el DOM
+  function mostrarTareas(tareas) {
+    console.log("Mostrando ", tareas);
+  }
+
+  // Función para mostrar el fomrulario de agragar tarea
   function mostrarFormulario() {
     const modal = document.createElement("DIV"); // Crea el modal
     modal.classList.add("modal"); // Agrega la clase modal

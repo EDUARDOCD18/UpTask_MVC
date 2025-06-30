@@ -10,6 +10,21 @@ class TareaController
     /* Método principal */
     public static function index()
     {
+
+        session_start();
+
+        $proyectoId = $_GET['id']; // Obtenerel ID del protecto desde la URL.
+
+        if (!$proyectoId) header('Location: /dashboard'); // Redirigir si no hay ID.
+
+        $proyecto = Proyecto::where('url', $proyectoId); // Consultar la base de datos por medio de la URL obtenida. 
+
+        if (!$proyecto || $proyecto->propietarioId !== $_SESSION['id']) header('Location: /404'); // Redirigier si no existe el proyecto o si no es el propietario. 
+
+        $tareas = Tarea::belongsTo('proyectoId', $proyecto->id);
+        
+        echo json_encode(['tareas' => $tareas]);
+
     }
 
     /* Método crear */

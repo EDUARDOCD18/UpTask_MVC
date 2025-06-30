@@ -22,11 +22,6 @@
     }
   }
 
-  // Fucnión para mostrar las tareas en el DOM
-  function mostrarTareas(tareas) {
-    console.log("Mostrando ", tareas);
-  }
-
   // Función para mostrar el fomrulario de agragar tarea
   function mostrarFormulario() {
     const modal = document.createElement("DIV"); // Crea el modal
@@ -87,6 +82,32 @@
       // Al pasar las validaciones, llamar a:
       agregarTarea(tarea);
     }
+  }
+
+  // Fucnión para mostrar las tareas en el DOM
+  function mostrarTareas(tareas) {
+    if (tareas.length === 0) {
+      const contenedorTareas = document.querySelector("#listado-tareas");
+      const textoNoTareas = document.createElement("LI");
+
+      textoNoTareas.textContent = "No hay tareas aún";
+      textoNoTareas.classList.add("no-tareas");
+
+      contenedorTareas.appendChild(textoNoTareas);
+      return;
+    }
+
+    // Iterar sobre las tareas y mostrarlas en el DOM
+    tareas.forEach((tarea) => {
+      const contenedorTarea = document.createElement("LI");
+      contenedorTarea.dataset.tareaId = tarea.id; // Asignar el ID de la tarea al elemento LI
+      contenedorTarea.classList.add("tarea");
+
+      const nombreTarea = document.createElement("P");
+      nombreTarea.textContent = tarea.nombre;
+
+      console.log(nombreTarea);
+    });
   }
 
   /* Función para mostrar la alerta */

@@ -37,13 +37,19 @@ class TareaController
 
                 echo json_encode($respuesta);
                 return;
-            } else {
-                $respuesta = [
-                    'tipo' => 'exito',
-                    'mensaje' => 'tarea agreda a tu proyecto.'
-                ];
-                echo json_encode($respuesta);
             }
+
+            // Todo bien, instanciar y crear la tarea
+            $tarea = new Tarea($_POST);
+            $tarea->proyectoId = $proyecto->id;
+            $resultado = $tarea->guardar();
+            $respuesta =  [
+                'tipo' => 'exito',
+                'id' => $resultado['id'],
+                'mensaje' => 'Tarea creada correctamente'
+            ];
+
+            echo json_encode($respuesta);
         }
     }
 

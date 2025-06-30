@@ -112,6 +112,15 @@
         resultado.tipo,
         document.querySelector(".formulario legend")
       );
+
+      // Cerrar el modal luego de agregar la tares
+      if (resultado.tipo === "exito") {
+        const modal = document.querySelector(".modal");
+
+        setTimeout(() => {
+          modal.remove();
+        }, 3000);
+      }
     } catch (error) {
       console.log(error);
     }

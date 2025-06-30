@@ -1,4 +1,3 @@
-<!-- Modelo para las tareas de los proyectos -->
 <?php
 
 namespace Model;
@@ -8,10 +7,10 @@ class Tarea extends ActiveRecord
     protected static $tabla = 'tareas';
     protected static $columnasDB = ['id', 'nombre', 'estado', 'proyectoId'];
 
-    protected $id;
-    protected $nombre;
-    protected $estado;
-    protected $proyectoId;
+    public $id;
+    public $nombre;
+    public $estado;
+    public $proyectoId;
 
     public function __construct($args = [])
     {

@@ -125,6 +125,9 @@
       btnEstadoTarea.classList.add(`${estados[tarea.estado].toLowerCase()}`);
       btnEstadoTarea.textContent = estados[tarea.estado];
       btnEstadoTarea.dataset.estadoTarea = tarea.estado;
+      btnEstadoTarea.ondblclick = function () {
+        cambiarEstadoTarea({ ...tarea });
+      };
 
       const btnEliminarTarea = document.createElement("BUTTON");
       btnEliminarTarea.classList.add("eliminar-tarea");
@@ -163,7 +166,7 @@
     // Eliminar la alerta luego de 3 segundos
     setTimeout(() => {
       alerta.remove();
-    }, 3000);
+    }, 2500);
   }
 
   /* Función para agregar la tarea. Consultar al servidor para agregar al proyecto actual */
@@ -195,7 +198,7 @@
 
         setTimeout(() => {
           modal.remove();
-        }, 3000);
+        }, 2500);
 
         // Agregar el objeto de tarea al arreglo de tareas
         const tareaObj = {
@@ -213,6 +216,19 @@
     } catch (error) {
       console.log(error);
     }
+  }
+
+  /* Función para cambiar el estado de la tarea */
+  function cambiarEstadoTarea(tarea) {
+    const nuevoEstado = tarea.estado === "1" ? "0" : "1";
+    tarea.estado = nuevoEstado;
+
+    actualizarTarea(tarea); // Actualiza la tarea en el servidor
+  }
+
+  /* Función para actualizar la tarea */
+  function actualizarTarea(tarea) {
+    console.log(tarea);
   }
 
   /* Función para obtener el proyecto */

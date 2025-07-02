@@ -12,3 +12,67 @@
     border-radius: 0.5rem;
   }
 }
+
+.listado-tareas {
+  list-style: none;
+  padding: 0;
+  margin-top: 3rem;
+
+  .no-tareas {
+    text-align: center;
+  }
+}
+
+.tarea {
+  padding: 0.5rem 2rem;
+  border-bottom: 2px solid darken(v.$grisClaro, 5%);
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &:last-of-type {
+    border: none;
+  }
+
+  p {
+    font-size: 1.4rem;
+  }
+
+  /* Botones de opciones */
+  .opciones {
+    display: flex;
+    gap: 1rem;
+
+    /* Botones generalesg */
+    button {
+      border: none;
+      font-size: 0.9rem;
+      padding: 0.5rem 1rem;
+      text-transform: uppercase;
+      border-radius: 1rem;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    /* Tarea realizada */
+    .realizada {
+      background-color: v.$azul;
+      color: v.$blanco;
+    }
+
+    /* Tarea pendiente */
+    .pendiente {
+      background-color: v.$naranja !important;
+      color: v.$blanco;
+    }
+
+    /* Eliminar tarea */
+    .eliminar-tarea {
+      background-color: v.$rojo;
+      color: v.$blanco;
+    }
+  }
+}

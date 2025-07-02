@@ -22,9 +22,8 @@ class TareaController
         if (!$proyecto || $proyecto->propietarioId !== $_SESSION['id']) header('Location: /404'); // Redirigier si no existe el proyecto o si no es el propietario. 
 
         $tareas = Tarea::belongsTo('proyectoId', $proyecto->id);
-        
-        echo json_encode(['tareas' => $tareas]);
 
+        echo json_encode(['tareas' => $tareas]);
     }
 
     /* Método crear */
@@ -61,7 +60,8 @@ class TareaController
             $respuesta =  [
                 'tipo' => 'exito',
                 'id' => $resultado['id'],
-                'mensaje' => 'Tarea creada correctamente'
+                'mensaje' => 'Tarea creada correctamente',
+                'proyectoId' => $proyecto->id
             ];
 
             echo json_encode($respuesta);

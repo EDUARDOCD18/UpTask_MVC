@@ -1,5 +1,6 @@
 (function () {
   obtenerTareas(); // Llamar a la función para obtener las tareas al cargar la página
+  let tareas = [];
 
   // Botón para mostrar el Modal de Agregar tarea
   const nuevaTareaBtn = document.querySelector("#agregar-tarea");
@@ -13,10 +14,10 @@
       const respuesta = await fetch(url);
       const resultado = await respuesta.json();
 
-      const { tareas } = resultado;
+      tareas = resultado.tareas; // Asignar las tareas obtenidas a la variable tareas.
 
       // Llamar a la función para motrar las tareas
-      mostrarTareas(tareas);
+      mostrarTareas();
     } catch (error) {
       console.log(error);
     }
@@ -85,7 +86,11 @@
   }
 
   // Fucnión para mostrar las tareas en el DOM
-  function mostrarTareas(tareas) {
+  function mostrarTareas() {
+    // Limpiar el listado de tareas antes de mostrar
+    limpiarTareas();
+
+    // Verificar si hay tareas
     if (tareas.length === 0) {
       const contenedorTareas = document.querySelector("#listado-tareas");
       const textoNoTareas = document.createElement("LI");
@@ -133,7 +138,7 @@
       contenedorTarea.appendChild(opcionesDiv);
 
       const listadoTareas = document.querySelector("#listado-tareas");
-      listadoTareas.appendChild(contenedorTarea)
+      listadoTareas.appendChild(contenedorTarea);
     });
   }
 
@@ -190,8 +195,20 @@
 
         setTimeout(() => {
           modal.remove();
-          window.location.reload(); // Recargar la página para mostrar la nueva tarea.
         }, 3000);
+
+        // Agregar el objeto de tarea al arreglo de tareas
+        const tareaObj = {
+          id: String(resultado.id),
+          nombre: tarea,
+          estado: 0,
+          proyectoId: resultado.proyectoId,
+        };
+
+        tareas = [...tareas, tareaObj]; // Asignar el nuevo objeto de tarea al arreglo de tareas.
+        mostrarTareas(); // Llamar a la función para mostrar las tareas en el DOM.
+
+        console.log(tareaObj);
       }
     } catch (error) {
       console.log(error);
@@ -205,5 +222,14 @@
     const proyecto = Object.fromEntries(proyectoParams.entries());
 
     return proyecto.id;
+  }
+
+  /* Función para limpiar el listado de tareas */
+  function limpiarTareas() {
+    const listadoTareas = document.querySelector("#listado-tareas");
+
+    while (listadoTareas.firstChild) {
+      listadoTareas.removeChild(listadoTareas.firstChild);
+    }
   }
 })();

@@ -190,6 +190,7 @@
 
         setTimeout(() => {
           modal.remove();
+          window.location.reload(); // Recargar la página para mostrar la nueva tarea.
         }, 3000);
       }
     } catch (error) {

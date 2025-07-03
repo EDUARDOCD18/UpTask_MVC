@@ -72,6 +72,38 @@ class TareaController
     public static function actualizar()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Validar que el proyecto exista
+            $proyecto = Proyecto::where('url', $_POST['proyectoId']);
+
+            session_start();
+
+            // Verificar si el proyecto existe
+            if (!$proyecto || $proyecto->propietarioId !== $_SESSION['id']) {
+
+                $respuesta = [
+                    'tipo' => 'error',
+                    'mensaje' => 'Error al actualizar la tarea.'
+                ];
+
+                echo json_encode($respuesta);
+                return;
+            }
+
+            $tarea = new Tarea($_POST);
+            $tarea->proyectoId = $proyecto->id;
+
+            // Guardar la tarea actualizada.
+            $resultado = $tarea->guardar();
+            if($resultado){
+                $respuesta = [
+                    'tipo' => 'exito', 
+                    'id' => $tarea->id,
+                    'proyectoId' => $proyecto->id,
+                    'mensaje' => 'Actulaizado correctamente'
+                ];
+            }
+
+            echo json_encode(['respuesta' => $respuesta]);
         }
     }
 

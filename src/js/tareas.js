@@ -257,6 +257,20 @@
           document.querySelector(".contenedor-nueva-tarea")
         );
       }
+
+      tareas = tareas.map((tareaMemoria) => {
+        if (tareaMemoria.id === id) {
+          tareaMemoria.estado = estado; // Actualizar el estado de la tarea en el arreglo de tareas.
+
+          // console.log("Esta sí es");
+        } /* else{
+          console.log('Esta no es');
+        } */
+
+          return tareaMemoria;
+      });
+
+      mostrarTareas(); // Llamar a la función para mostrar las tareas en el DOM.
     } catch (error) {
       console.log(error);
     }

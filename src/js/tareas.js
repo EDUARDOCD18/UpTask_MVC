@@ -120,6 +120,8 @@
       opcionesDiv.classList.add("opciones");
 
       // Botones
+
+      /* Botón para cambiar el estado de la tarea */
       const btnEstadoTarea = document.createElement("BUTTON");
       btnEstadoTarea.classList.add("estado-tarea");
       btnEstadoTarea.classList.add(`${estados[tarea.estado].toLowerCase()}`);
@@ -129,10 +131,14 @@
         cambiarEstadoTarea({ ...tarea });
       };
 
+      /* Botón para eliminar la tarea */
       const btnEliminarTarea = document.createElement("BUTTON");
       btnEliminarTarea.classList.add("eliminar-tarea");
       btnEliminarTarea.dataset.idTarea = tarea.id; // Asignar el ID de la tarea al botón.
       btnEliminarTarea.textContent = "Eliminar";
+      btnEliminarTarea.ondblclick = function () {
+        confirmarEliminarTarea({ ...tarea });
+      };
 
       opcionesDiv.appendChild(btnEstadoTarea);
       opcionesDiv.appendChild(btnEliminarTarea);
@@ -267,7 +273,7 @@
           console.log('Esta no es');
         } */
 
-          return tareaMemoria;
+        return tareaMemoria;
       });
 
       mostrarTareas(); // Llamar a la función para mostrar las tareas en el DOM.
@@ -276,6 +282,31 @@
     }
   }
 
+  /* Función para confirmar la eliminación de la tarea */
+  function confirmarEliminarTarea(tarea) {
+    Swal.fire({
+      title: "¿Desea eliminar la tarea?",
+      showCancelButton: true,
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "No, cancelar",
+    }).then((result) => {
+      // Si el usuario confirma la eliminación.
+      if (result.isConfirmed) {
+        eliminarTarea(tarea); // Llamar a lafunción para eliminar la tarea.
+      }
+    });
+  }
+
+  /* Función para eliminar la tarea */
+  async function eliminarTarea(tarea) {
+    const datos = new FormData();
+
+    try {
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
   /* Función para obtener el proyecto */
   function obtenerProyecto() {
     // Obtener el ID del proyecto desde la URL

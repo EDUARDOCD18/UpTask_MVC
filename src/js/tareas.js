@@ -36,12 +36,16 @@
       <legend>${editar ? "Editar tarea" : "Añade una nueva tarea"}</legend>
       <div class="campo">
         <label>Tarea</label>
-        <input type="text" name="tarea" placeholder="${tarea.nombre ? "Edita la tarea" : "Añade una tarea al proyecto actual"}" id="tarea"
+        <input type="text" name="tarea" placeholder="${
+          tarea.nombre ? "Edita la tarea" : "Añade una tarea al proyecto actual"
+        }" id="tarea"
         value="${tarea.nombre ? tarea.nombre : ""}" />
       </div>
 
       <div class="opciones">
-        <input type="submit" class="submit-nueva-tarea" value="${tarea.nombre ? "Editar la tarea" : "Añadir tarea"}" />
+        <input type="submit" class="submit-nueva-tarea" value="${
+          tarea.nombre ? "Editar la tarea" : "Añadir tarea"
+        }" />
         <button type="button" class="cerrar-modal">Cancelar</button>
       </div>
     </form>
@@ -65,27 +69,28 @@
       }
 
       if (e.target.classList.contains("submit-nueva-tarea")) {
-        submitFormularioNuevaTarea();
+        const nombreTarea = document.querySelector("#tarea").value.trim();
+
+        if (nombreTarea === "") {
+          // Mostrar alerta de que el nombre de la Tarea no debe ir vacío
+          mostrarAlerta(
+            "El nombre de la tarea es obligatorio",
+            "error",
+            document.querySelector(".formulario legend")
+          );
+          return;
+        }
+
+        if (editar) {
+          tarea.nombre = nombreTarea; // Asignar el nombre de la tarea al objeto tarea
+          actualizarTarea(tarea); // Llamara a la función para editar la tarea
+        } else {
+          agregarTarea(nombreTarea); // Llamar a la función para agrgar la tarea
+        }
       }
     });
 
     document.querySelector(".dashboard").appendChild(modal); // Agregal el modal al documento
-
-    function submitFormularioNuevaTarea() {
-      const tarea = document.querySelector("#tarea").value.trim();
-
-      if (tarea === "") {
-        // Mostrar alerta de que el nombre de la Tarea no debe ir vacío
-        mostrarAlerta(
-          "El nombre de la tarea es obligatorio",
-          "error",
-          document.querySelector(".formulario legend")
-        );
-        return;
-      }
-      // Al pasar las validaciones, llamar a:
-      agregarTarea(tarea);
-    }
   }
 
   // Fucnión para mostrar las tareas en el DOM
@@ -121,7 +126,7 @@
 
       // Editar el nombre de la tarea al hacer doble click
       nombreTarea.ondblclick = function () {
-        mostrarFormulario((editar = true), tarea);
+        mostrarFormulario((editar = true), { ...tarea });
       };
 
       const opcionesDiv = document.createElement("DIV");

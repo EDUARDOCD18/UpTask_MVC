@@ -270,16 +270,23 @@
       const resultado = await respuesta.json();
 
       if (resultado.respuesta.tipo === "exito") {
-        mostrarAlerta(
+        Swal.fire(
           resultado.respuesta.mensaje,
-          resultado.respuesta.tipo,
-          document.querySelector(".contenedor-nueva-tarea")
+          resultado.respuesta.mensaje,
+          "success"
         );
+
+        // Cerrar el modal
+        const modal = document.querySelector(".modal");
+        if (modal) {
+          modal.remove();
+        }
       }
 
       tareas = tareas.map((tareaMemoria) => {
         if (tareaMemoria.id === id) {
           tareaMemoria.estado = estado; // Actualizar el estado de la tarea en el arreglo de tareas.
+          tareaMemoria.nombre = nombre; // Actualizar el estado de la tarea en el arreglo de tareas
 
           // console.log("Esta sí es");
         } /* else{

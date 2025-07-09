@@ -1,12 +1,36 @@
 (function () {
   obtenerTareas(); // Llamar a la función para obtener las tareas al cargar la página
   let tareas = [];
+  let filtradas = [];
 
   // Botón para mostrar el Modal de Agregar tarea
   const nuevaTareaBtn = document.querySelector("#agregar-tarea");
   nuevaTareaBtn.addEventListener("click", function () {
     mostrarFormulario();
   });
+
+  /* Filtros de búsqueda */
+  const filtros = document.querySelectorAll('#filtros input[type="radio"]');
+
+  filtros.forEach((radio) => {
+    radio.addEventListener("input", filtrarTareas);
+  });
+
+  // console.log(filtros);
+
+  // Función para filtrar las tareas
+  function filtrarTareas(e) {
+    const filtro = e.target.value;
+
+    if (filtro !== "") {
+      filtradas = tareas.filter((tarea) => tarea.estado === filtro);
+    } else {
+      filtradas = [];
+    }
+
+    // console.log(filtradas);
+    mostrarTareas();
+  }
 
   // Función para obtener las tareas del proyecto actual
   async function obtenerTareas() {
@@ -98,8 +122,10 @@
     // Limpiar el listado de tareas antes de mostrar
     limpiarTareas();
 
+    const arrayTareas = filtradas.length ? filtradas : tareas;
+
     // Verificar si hay tareas
-    if (tareas.length === 0) {
+    if (arrayTareas.length === 0) {
       const contenedorTareas = document.querySelector("#listado-tareas");
       const textoNoTareas = document.createElement("LI");
 
@@ -116,7 +142,7 @@
     };
 
     // Iterar sobre las tareas y mostrarlas en el DOM
-    tareas.forEach((tarea) => {
+    arrayTareas.forEach((tarea) => {
       const contenedorTarea = document.createElement("LI");
       contenedorTarea.dataset.tareaId = tarea.id; // Asignar el ID de la tarea al elemento LI
       contenedorTarea.classList.add("tarea");

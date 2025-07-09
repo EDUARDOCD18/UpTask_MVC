@@ -49,6 +49,36 @@
     }
   }
 
+  // Función para visualizar solo las tareas pendientes
+  function totalPendientes() {
+    const totalPendientes = tareas.filter((tareas) => tareas.estado === "0");
+    const pendientesRadio = document.querySelector("#pendientes");
+
+    if (totalPendientes.length === 0) {
+      pendientesRadio.disabled = true;
+    } else {
+      pendientesRadio.disabled = false;
+    }
+
+    /*     console.log("Total: ");
+    console.log(totalPendientes); */
+  }
+
+  // Función para visualizar solo las tareas completas
+  function totalCompletas() {
+    const totalCompletas = tareas.filter((tareas) => tareas.estado === "1");
+    const completadasRadio = document.querySelector("#completadas");
+
+    if (totalCompletas.length === 0) {
+      completadasRadio.disabled = true;
+    } else {
+      completadasRadio.disabled = false;
+    }
+
+    /*     console.log("Total: ");
+    console.log(totalCompletas); */
+  }
+
   // Función para mostrar el fomrulario de agragar tarea
   function mostrarFormulario(editar = false, tarea = {}) {
     const modal = document.createElement("DIV"); // Crea el modal
@@ -121,6 +151,8 @@
   function mostrarTareas() {
     // Limpiar el listado de tareas antes de mostrar
     limpiarTareas();
+    totalPendientes();
+    totalCompletas();
 
     const arrayTareas = filtradas.length ? filtradas : tareas;
 

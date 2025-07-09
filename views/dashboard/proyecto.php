@@ -21,13 +21,13 @@
             <!-- Filtrar por completadas -->
             <div class="campo">
                 <label for="todas">Completadas</label>
-                <input type="radio" id="Completadas" name="filtro" value="1">
+                <input type="radio" id="completadas" name="filtro" value="1">
             </div>
 
             <!-- Filtrar por pendientes -->
             <div class="campo">
                 <label for="todas">Pendientes</label>
-                <input type="radio" id="Pendientes" name="filtro" value="0">
+                <input type="radio" id="pendientes" name="filtro" value="0">
             </div>
         </div>
     </div>

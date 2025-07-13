@@ -20,3 +20,11 @@ if (cerrarMenuBtn) {
     }, 800);
   });
 }
+
+/* Elimina la clase de mostrar en tamaño de tablet o mayores */
+window.addEventListener("resize", function () {
+  const anchoPantalla = document.body.clientWidth;
+  if (anchoPantalla >= 768) {
+    sidebar.classList.remove("mostrar");
+  }
+});

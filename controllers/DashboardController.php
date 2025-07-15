@@ -83,7 +83,6 @@ class DashboardController
     }
 
     /* Método para el perfil */
-
     public static function perfil(Router $router)
     {
         session_start();
@@ -92,6 +91,16 @@ class DashboardController
 
         $usuario = Usuario::find($_SESSION['id']);
         // debuguear($usuario);
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $usuario->sincronizar($_POST);
+            $alertas = $usuario->validar_perfil();
+            // debuguear($usuario);
+
+            if(empty($aletas)){
+                // Guardar los cambios en la BDD
+            }
+        }
 
         $router->render('dashboard/perfil', [
             'titulo' => 'Perfil',

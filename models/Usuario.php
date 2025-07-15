@@ -111,6 +111,19 @@ class Usuario extends ActiveRecord
         return self::$alertas;
     }
 
+    /* Validar el perfil */
+    public function validar_perfil()
+    {
+        if (!$this->nombre) {
+            self::$alertas['error'][] = 'El Nombre es Obligatorio';
+        }
+        if (!$this->email) {
+            self::$alertas['error'][] = 'El Correo es Obligatorio';
+        }
+
+        return self::$alertas;
+    }
+
     /* Hashear el password */
     public function hashearPassword()
     {

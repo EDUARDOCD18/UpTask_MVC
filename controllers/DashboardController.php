@@ -4,6 +4,7 @@ namespace Controllers;
 
 use MVC\Router;
 use Model\Proyecto;
+use Model\Usuario;
 
 
 class DashboardController
@@ -19,7 +20,7 @@ class DashboardController
         $proyectos = Proyecto::belongsTo('propietarioId', $id);
 
         $router->render('dashboard/index', [
-            'titulo' => 'Proyectos', 
+            'titulo' => 'Proyectos',
             'proyectos' => $proyectos
         ]);
     }
@@ -81,14 +82,21 @@ class DashboardController
         ]);
     }
 
-    /* Perfil */
+    /* Método para el perfil */
+
     public static function perfil(Router $router)
     {
         session_start();
         isAuth();
+        $alertas = [];
+
+        $usuario = Usuario::find($_SESSION['id']);
+        // debuguear($usuario);
 
         $router->render('dashboard/perfil', [
-            'titulo' => 'Perfil'
+            'titulo' => 'Perfil',
+            'alertas' => $alertas,
+            'usuario' => $usuario
         ]);
     }
 }

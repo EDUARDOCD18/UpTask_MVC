@@ -4,6 +4,8 @@ namespace Controllers;
 
 use Model\Proyecto;
 use Model\Tarea;
+use Model\Usuario;
+use MVC\Router;
 
 class TareaController
 {
@@ -134,7 +136,7 @@ class TareaController
 
             $resultado = [
                 'resultado' => $resultado,
-                'mensaje' => "Tarea eliminada correctamente", 
+                'mensaje' => "Tarea eliminada correctamente",
                 'tipo' => 'exito',
             ];
 

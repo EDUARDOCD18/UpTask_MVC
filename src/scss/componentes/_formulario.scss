@@ -11,14 +11,15 @@
     margin-bottom: 2rem;
 
     label {
-        flex: 0 0 10rem;
+      flex: 0 0 10rem;
     }
 
     input {
-        flex: 1;
-        padding: 1rem;
-        border: none;
-        background-color: lighten(v.$gris, 40%);
+      margin-left: 1rem;
+      flex: 1;
+      padding: 1rem;
+      border: none;
+      background-color: lighten(v.$gris, 40%);
     }
   }
 }

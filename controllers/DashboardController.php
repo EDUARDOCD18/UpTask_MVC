@@ -98,13 +98,22 @@ class DashboardController
             // debuguear($usuario);
 
             if (empty($aletas)) {
-                // Guardar los cambios en la BDD
-                $usuario->guardar(); // Guarda el registro
+                $existeUsuario = Usuario::where('email', $usuario->email);
+                // debuguear($existeUsuario);
 
-                Usuario::setAlerta('exito', 'Guardado correctamente');
-                $alertas = $usuario->getAlertas();
+                if ($existeUsuario && $existeUsuario->id !== $usuario->id) {
+                    // Mensaje de erro por correo duplicado
+                    Usuario::setAlerta('error', 'El correo ya se encuentra asociado a otra cuenta');
+                    $alertas = $usuario->getAlertas();
+                } else {
+                    // Guardar los cambios en la BDD
+                    $usuario->guardar(); // Guarda el registro
 
-                $_SESSION['nombre'] = $usuario->nombre; // Actualiza el nombre en la sesión en la barra.
+                    Usuario::setAlerta('exito', 'Guardado correctamente');
+                    $alertas = $usuario->getAlertas();
+
+                    $_SESSION['nombre'] = $usuario->nombre; // Actualiza el nombre en la sesión en la barra.
+                }
             }
         }
 

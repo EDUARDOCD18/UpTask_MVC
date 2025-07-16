@@ -97,8 +97,14 @@ class DashboardController
             $alertas = $usuario->validar_perfil();
             // debuguear($usuario);
 
-            if(empty($aletas)){
+            if (empty($aletas)) {
                 // Guardar los cambios en la BDD
+                $usuario->guardar(); // Guarda el registro
+
+                Usuario::setAlerta('exito', 'Guardado correctamente');
+                $alertas = $usuario->getAlertas();
+
+                $_SESSION['nombre'] = $usuario->nombre; // Actualiza el nombre en la sesión en la barra.
             }
         }
 

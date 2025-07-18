@@ -146,14 +146,21 @@ class Usuario extends ActiveRecord
         return self::$alertas;
     }
 
+    /* Comnprobar que el password sea el correcto al momento de cambiarlo */
+    public function comprobar_password(): bool
+    {
+        return password_verify($this->password_actual, $this->password);
+        
+    }
+
     /* Hashear el password */
-    public function hashearPassword()
+    public function hashearPassword(): void
     {
         $this->password = password_hash($this->password, PASSWORD_BCRYPT);
     }
 
     /* Generar un token único */
-    public function crearToken()
+    public function crearToken(): void
     {
         $this->token = uniqid();
     }

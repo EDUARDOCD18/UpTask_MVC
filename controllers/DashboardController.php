@@ -140,6 +140,18 @@ class DashboardController
 
             $alertas = $usuario->nuevo_password();
             // debuguear($usuario);
+
+            if (empty($alertas)) {
+                $resultado = $usuario->comprobar_password();
+                // debuguear($resultado);
+
+                if ($resultado) {
+                    // Asignar el nuevo password
+                } else {
+                    Usuario::setAlerta('erro', 'Contraseña incorrecta');
+                    $alertas = $usuario->getAlertas();
+                }
+            }
         }
 
         $router->render('dashboard/cambiar-password', [

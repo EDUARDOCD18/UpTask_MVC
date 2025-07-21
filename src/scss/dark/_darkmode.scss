@@ -1,0 +1,14 @@
+@use "base/mixins" as m;
+@use "base/variables" as v;
+
+@media (prefers-color-scheme: dark) {
+  $grisOscuro: #2c2c2c;
+
+  body {
+    background-color: $grisOscuro;
+  }
+
+  .tagline {
+    color: v.$blanco;
+  }
+}

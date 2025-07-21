@@ -146,9 +146,27 @@ class DashboardController
                 // debuguear($resultado);
 
                 if ($resultado) {
-                    // Asignar el nuevo password
+                    // Reemplazar la contraseña vieja por la nueva
+                    $usuario->password = $usuario->password_nuevo;
+
+                    //  Eliminar propiedades no necesarias
+                    unset($usuario->password_actual);
+                    unset($usuario->password_nuevo);
+
+                    // Hashear el nuevo password
+                    $usuario->hashearPassword();
+
+                    // Actualizar en la base de datos
+                    $resultado = $usuario->guardar();
+
+                    if ($resultado) {
+                        Usuario::setAlerta('exito', 'Registro actualizado');
+                        $alertas = $usuario->getAlertas();
+                    }
+
+                    // debuguear($usuario);
                 } else {
-                    Usuario::setAlerta('erro', 'Contraseña incorrecta');
+                    Usuario::setAlerta('error', 'Contraseña incorrecta');
                     $alertas = $usuario->getAlertas();
                 }
             }
